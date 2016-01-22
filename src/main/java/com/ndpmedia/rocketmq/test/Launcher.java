@@ -12,11 +12,15 @@ import java.io.InputStream;
 
 public class Launcher {
 
-    public static void main(String[] args) {
+    static {
+        System.setProperty("rocketmq.namesrv.addr", "localhost:9876");
         System.setProperty("enable_ssl", "true");
+        System.setProperty("log.home", System.getProperty("user.home"));
+    }
+
+    public static void main(String[] args) {
         final String home = System.getProperty("user.home") + File.separator + "rocketmq";
         System.setProperty("rocketmq.home.dir", home);
-        System.setProperty("log.home", System.getProperty("user.home"));
 
         checkAndCreateDirs(home);
         deployConfigResources(home);

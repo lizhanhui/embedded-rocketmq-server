@@ -32,7 +32,6 @@ public class IntegrationTest {
     @Test
     public void testSendMessage() throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("PG_QuickStart");
-        producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 
         Message message = new Message("T_QuickStart", "Hello".getBytes());
@@ -41,11 +40,9 @@ public class IntegrationTest {
         producer.shutdown();
     }
 
-
     @Test
     public void testConsumeMessage() throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CG_QuickStart");
-        consumer.setNamesrvAddr("127.0.0.1:9876");
         final AtomicInteger count = new AtomicInteger(0);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe("T_QuickStart", null);
